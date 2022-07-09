@@ -1,0 +1,3 @@
+rep "ITfare2019@raren0130@cloud"
+  path "/"
+    smartbranch "/main"
