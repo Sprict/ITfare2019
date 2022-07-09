@@ -26,24 +26,22 @@ public class KeyManager : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && GameState.state == GameState.statusList.PreStart)
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Quit();
+        }
+        // シーンを再読み込み
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            moveScene(SceneManager.GetActiveScene().name);
+        }
+        else if(Input.GetKeyDown(KeyCode.Space) && GameState.state == GameState.statusList.PreStart)
         {
             GameState.state = GameState.statusList.Started;
             timer.StartTimer(limitTime);
             fallmanager.StartFall();
         }
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Quit();
-        }
-
-        // シーンを再読み込み
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            moveScene(SceneManager.GetActiveScene().name);
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
+        else if (Input.GetKeyDown(KeyCode.H))
         {
             if (setumei.activeSelf == false)
             {
