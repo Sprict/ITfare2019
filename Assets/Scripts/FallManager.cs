@@ -8,8 +8,8 @@ public class FallManager : MonoBehaviour
     public Fruit[] fruits;
     public Timer timer;
 
-    public float fallAreaLeft;
-    public float fallAreaRight;
+    public float AreaLimitLeft = -11.0f;
+    public float AreaLimitRight = 11.0f;
     public float rate = 1.0f;
 
     private void Start()
@@ -25,7 +25,7 @@ public class FallManager : MonoBehaviour
     {
         do
         {
-            float insPosx = Random.Range(fallAreaLeft, fallAreaRight);
+            float insPosx = Random.Range(AreaLimitLeft, AreaLimitRight);
             int selected_fruit = SelectFruit();
             Instantiate(fruits[selected_fruit].fruit, new Vector3(insPosx, 10.0f, 0.0f), Quaternion.identity);
             yield return new WaitForSeconds(this.rate);
