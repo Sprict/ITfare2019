@@ -3341,7 +3341,6 @@ GameObject:
   - component: {fileID: 1525746230}
   - component: {fileID: 1525746232}
   - component: {fileID: 1525746233}
-  - component: {fileID: 1525746229}
   - component: {fileID: 1525746235}
   - component: {fileID: 1525746234}
   - component: {fileID: 1525746236}
@@ -3354,20 +3353,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1525746229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525746228}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a5fa1c9f7612840ad815aa471af973, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BodySourceManager: {fileID: 1525746228}
-  rb: {fileID: 1791147983}
 --- !u!114 &1525746230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3416,8 +3401,8 @@ MonoBehaviour:
   - fruit: {fileID: 6966597404219194653, guid: f958a6dac5bb7be49b3c728925c5b23e, type: 3}
     apRate: 1
   timer: {fileID: 1525746235}
-  fallAreaLeft: -8
-  fallAreaRight: 8
+  AreaLimitLeft: -11
+  AreaLimitRight: 11
   rate: 0.5
 --- !u!114 &1525746233
 MonoBehaviour:
