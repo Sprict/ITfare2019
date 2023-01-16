@@ -10,8 +10,6 @@ public class KeyManager : MonoBehaviour
     [SerializeField]
     private FallManager fallmanager = null;
     [SerializeField]
-    private int limitTime;
-    [SerializeField]
     private GameObject setumei;
     public AudioClip open;
     public AudioClip close;
@@ -38,7 +36,7 @@ public class KeyManager : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Space) && GameState.state == GameState.statusList.PreStart)
         {
             GameState.state = GameState.statusList.Started;
-            timer.StartTimer(limitTime);
+            timer.StartTimer();
             fallmanager.StartFall();
         }
         else if (Input.GetKeyDown(KeyCode.H))

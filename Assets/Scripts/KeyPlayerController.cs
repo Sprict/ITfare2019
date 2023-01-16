@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // キーボード操作でのRigidBody2D移動・回転を追加する
 public class KeyPlayerController : MonoBehaviour
@@ -25,18 +23,19 @@ public class KeyPlayerController : MonoBehaviour
     {
         // キーボードでのプレイヤー移動処理
         float AxisX = Input.GetAxis("Horizontal");
+        float AxisY = Input.GetAxis("Vertical");
+        float AxisT = Input.GetAxis("Trigger");
         float movedX = Mathf.Clamp(player.position.x + movingSpeed * Time.deltaTime * AxisX, minX, maxX);
         Vector2 movedPosition = new Vector2(movedX, player.position.y);
         player.MovePosition(movedPosition);
 
-        if(Input.GetKey(KeyCode.Q))
+        if (AxisY != 0)
         {
-            Debug.Log(player.name);
-            player.MoveRotation(player.rotation + rotateSpeed * Time.fixedDeltaTime);
+            player.MoveRotation(player.rotation + AxisY * rotateSpeed * Time.fixedDeltaTime);
         }
-        else if(Input.GetKey(KeyCode.E))
+        else if (AxisT != 0)
         {
-            player.MoveRotation(player.rotation - rotateSpeed * Time.fixedDeltaTime);
+            player.MoveRotation(player.rotation - AxisT * rotateSpeed * Time.fixedDeltaTime);
         }
     }
 }

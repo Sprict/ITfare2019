@@ -12,40 +12,47 @@ public class Timer : MonoBehaviour
     [SerializeField] private GameObject[] image;
     [SerializeField] private ScoreManager scoreManager;
 
-    [SerializeField] private int timeLimit = 60;
+    [SerializeField] public uint timeLimit_sec = 60;
+
+    [NonSerialized] public uint currentTime;
     public Text _countText;
 
-
+    private void Start()
+    {
+        _countText.text = timeLimit_sec.ToString();
+    }
     /// <summary>
     /// ゲームのカウントダウンを開始する
     /// </summary>
-    /// <param name="timeLimit">制限時間</param>
+    /// <param name="timeLimit_sec">制限時間</param>
     /// 
-    public void StartTimer(int timeLimit)
+    public void StartTimer()
     {
         soundManager.playStartSound();
         startObj.SetActive(true);
-        this.timeLimit = timeLimit;
-        StartCoroutine(Example(1.0f));
+        StartCoroutine(timeCoroutine(timeLimit_sec));
     }
 
-    IEnumerator Example(float time)
+    IEnumerator timeCoroutine(uint time)
     {
-        for (int i = timeLimit; i >= 0; i--)
+        for (currentTime = time; currentTime > 0; currentTime--)
         {
-            print(i);
-            _countText.text = Convert.ToString(i);
-            if (i == 15 || i == 30)
-            {
-                fallManager.rate /= 2.0f;
-            }
+            // 残り時間を画面左上のタイマー表示に反映
+            _countText.text = currentTime.ToString();
+            // 残り時間が少なるに連れて段階的にフルーツの落下頻度が上昇いていく
+            var tmp = Mathf.Pow(20, (timeLimit_sec - currentTime) / (float)timeLimit_sec);
+            Debug.Log(tmp);
+            fallManager.rate = tmp;
+
             yield return new WaitForSeconds(1.0f);
         }
-        _countText.text = "finish";
+        // タイムアップ時の処理
+        _countText.text = "TIMEUP!";
         soundManager.playFinishSound();
         finishObj.SetActive(true);
         GameState.state = GameState.statusList.Finished;
-        // 5病後にシーン遷移
+
+        // 5秒後にシーン遷移する
         Invoke("changeScene", 5.0f);
         yield return null;
     }
